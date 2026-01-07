@@ -188,7 +188,7 @@ h3 { font-size: var(--font-size-large); }
     margin-bottom: var(--spacing-lg);
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     /* -webkit-background-clip: text; */
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: #ffff;
 }
 
 .hero-subtitle {
