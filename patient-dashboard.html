@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard - AyurSutra</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="dashboard-page">
+    <!-- Navigation Bar -->
+    <nav class="navbar dashboard-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><i class="fas fa-leaf"></i> AyurSutra</h2>
+            </div>
+            <div class="nav-menu">
+                <span class="welcome-text">Welcome, <span id="patientName">Loading...</span></span>
+                <div class="notification-icon" onclick="toggleNotifications()">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge" id="notificationCount">3</span>
+                </div>
+                <a href="#" onclick="logout()" class="nav-link logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active">
+                        <a href="#overview" onclick="showSection('overview')">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Overview</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#treatment" onclick="showSection('treatment')">
+                            <i class="fas fa-procedures"></i>
+                            <span>Treatment Progress</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#appointments" onclick="showSection('appointments')">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Appointments</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#feedback" onclick="showSection('feedback')">
+                            <i class="fas fa-comment-medical"></i>
+                            <span>Feedback</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#notifications" onclick="showSection('notifications')">
+                            <i class="fas fa-bell"></i>
+                            <span>Notifications</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Overview Section -->
+            <section id="overview" class="content-section active">
+                <div class="section-header">
+                    <h2><i class="fas fa-tachometer-alt"></i> Dashboard Overview</h2>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="doctorName">Dr. Loading...</h3>
+                            <p>Assigned Doctor</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-hospital"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="hospitalName">Loading...</h3>
+                            <p>Treatment Center</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-procedures"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="treatmentType">Loading...</h3>
+                            <p>Treatment Type</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-day"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="nextSession">Loading...</h3>
+                            <p>Next Session</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="patient-info-card">
+                    <h3>Patient Information</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Patient ID:</label>
+                            <span id="patientId">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Disease/Condition:</label>
+                            <span id="patientCondition">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Treatment Start Date:</label>
+                            <span id="treatmentStart">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Expected Completion:</label>
+                            <span id="treatmentEnd">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Treatment Progress Section -->
+            <section id="treatment" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-procedures"></i> Treatment Progress</h2>
+                    <button class="btn-secondary" onclick="requestScheduleChange()">
+                        <i class="fas fa-calendar-alt"></i> Request Schedule Change
+                    </button>
+                </div>
+
+                <div class="progress-container">
+                    <div class="progress-header">
+                        <h3>Panchkarma Treatment Plan</h3>
+                        <div class="progress-stats">
+                            <span class="progress-text">Progress: <span id="overallProgress">60%</span></span>
+                            <span class="sessions-text">Sessions: <span id="completedSessions">6</span>/<span id="totalSessions">10</span></span>
+                        </div>
+                    </div>
+
+                    <div class="progress-timeline">
+                        <div id="treatmentSteps" class="steps-container">
+                            <!-- Steps will be dynamically loaded -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Appointments Section -->
+            <section id="appointments" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar-check"></i> Appointments</h2>
+                </div>
+
+                <div class="appointments-container">
+                    <div class="appointment-tabs">
+                        <button class="tab-btn active" onclick="showAppointmentTab('upcoming')">Upcoming</button>
+                        <button class="tab-btn" onclick="showAppointmentTab('completed')">Completed</button>
+                    </div>
+
+                    <div id="upcomingAppointments" class="appointments-list active">
+                        <!-- Upcoming appointments will be loaded here -->
+                    </div>
+
+                    <div id="completedAppointments" class="appointments-list">
+                        <!-- Completed appointments will be loaded here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Feedback Section -->
+            <section id="feedback" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-comment-medical"></i> Feedback</h2>
+                </div>
+
+                <div class="feedback-container">
+                    <div class="feedback-form-card">
+                        <h3>Submit Feedback</h3>
+                        <form id="feedbackForm" class="feedback-form">
+                            <div class="form-group">
+                                <label for="feedbackDoctor">Doctor</label>
+                                <input type="text" id="feedbackDoctor" readonly>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="rating">Overall Rating</label>
+                                <div class="rating-stars">
+                                    <i class="fas fa-star" data-rating="1"></i>
+                                    <i class="fas fa-star" data-rating="2"></i>
+                                    <i class="fas fa-star" data-rating="3"></i>
+                                    <i class="fas fa-star" data-rating="4"></i>
+                                    <i class="fas fa-star" data-rating="5"></i>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="feedbackCategory">Feedback Category</label>
+                                <select id="feedbackCategory">
+                                    <option value="treatment">Treatment Quality</option>
+                                    <option value="service">Service Quality</option>
+                                    <option value="facility">Facility</option>
+                                    <option value="staff">Staff Behavior</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="feedbackMessage">Your Feedback</label>
+                                <textarea id="feedbackMessage" rows="5" placeholder="Please share your experience..."></textarea>
+                            </div>
+
+                            <button type="submit" class="btn-primary">Submit Feedback</button>
+                        </form>
+                    </div>
+
+                    <div class="previous-feedback">
+                        <h3>Previous Feedback</h3>
+                        <div id="previousFeedback">
+                            <!-- Previous feedback will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Notifications Section -->
+            <section id="notifications" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-bell"></i> Notifications</h2>
+                    <button class="btn-secondary" onclick="markAllAsRead()">Mark All as Read</button>
+                </div>
+
+                <div class="notifications-container">
+                    <div id="notificationsList">
+                        <!-- Notifications will be loaded here -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Notification Dropdown -->
+    <div id="notificationDropdown" class="notification-dropdown">
+        <div class="notification-header">
+            <h4>Recent Notifications</h4>
+            <button onclick="toggleNotifications()" class="close-notifications">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="quickNotifications" class="quick-notifications">
+            <!-- Quick notifications will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Schedule Change Modal -->
+    <div id="scheduleChangeModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeScheduleChangeModal()">&times;</span>
+            <h2>Request Schedule Change</h2>
+            <form id="scheduleChangeForm">
+                <div class="form-group">
+                    <label for="changeReason">Reason for Change</label>
+                    <select id="changeReason">
+                        <option value="emergency">Medical Emergency</option>
+                        <option value="personal">Personal Emergency</option>
+                        <option value="work">Work Conflict</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="changeDetails">Additional Details</label>
+                    <textarea id="changeDetails" rows="4" placeholder="Please provide more details about your request..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" onclick="closeScheduleChangeModal()" class="btn-secondary">Cancel</button>
+                    <button type="submit" class="btn-primary">Submit Request</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/patient-dashboard.js"></script>
+</body>
+</html>

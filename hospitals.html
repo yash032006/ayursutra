@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospitals - AyurSutra</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><i class="fas fa-leaf"></i> AyurSutra</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="hospitals.html" class="nav-link active">Hospitals</a>
+                <a href="faq.html" class="nav-link">FAQ</a>
+                <a href="login.html" class="nav-link login-btn">
+                    <i class="fas fa-user"></i> Login
+                </a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Our Partner Hospitals</h1>
+            <p>Find the best Ayurvedic treatment centers near you</p>
+        </div>
+    </section>
+
+    <!-- Search Filters -->
+    <section class="search-filters">
+        <div class="container">
+            <div class="filter-row">
+                <input type="text" id="searchHospital" placeholder="Search hospitals..." class="search-input">
+                <select id="cityFilter" class="filter-select">
+                    <option value="">All Cities</option>
+                    <option value="mumbai">Mumbai</option>
+                    <option value="pune">Pune</option>
+                    <option value="kerala">Kerala</option>
+                    <option value="bangalore">Bangalore</option>
+                </select>
+                <select id="specialtyFilter" class="filter-select">
+                    <option value="">All Specialties</option>
+                    <option value="panchkarma">Panchkarma</option>
+                    <option value="general">General Ayurveda</option>
+                    <option value="wellness">Wellness</option>
+                </select>
+                <button onclick="applyFilters()" class="btn-primary">Search</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hospitals Grid -->
+    <section class="hospitals-grid">
+        <div class="container">
+            <div id="hospitalsContainer" class="hospitals-container">
+                <!-- Hospital cards will be dynamically loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content booking-modal">
+            <span class="close" onclick="closeBookingModal()">&times;</span>
+            <h2>Book Appointment</h2>
+            <form id="bookingForm" class="booking-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="patientName">Full Name *</label>
+                        <input type="text" id="patientName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNumber">Phone Number *</label>
+                        <input type="tel" id="phoneNumber" required>
+                        <button type="button" id="sendOtp" onclick="sendOTP()">Send OTP</button>
+                    </div>
+                </div>
+
+                <div class="form-group otp-group" id="otpGroup" style="display: none;">
+                    <label for="otpCode">Enter OTP *</label>
+                    <input type="text" id="otpCode" maxlength="6">
+                    <button type="button" onclick="verifyOTP()">Verify</button>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="appointmentDate">Preferred Date *</label>
+                        <input type="date" id="appointmentDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="timeSlot">Time Slot</label>
+                        <select id="timeSlot">
+                            <option value="morning">Morning (9 AM - 12 PM)</option>
+                            <option value="afternoon">Afternoon (2 PM - 5 PM)</option>
+                            <option value="evening">Evening (5 PM - 8 PM)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="issueDescription">Health Issue Description (Optional)</label>
+                    <textarea id="issueDescription" rows="4" placeholder="Briefly describe your health concerns..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" onclick="closeBookingModal()" class="btn-secondary">Cancel</button>
+                    <button type="submit" class="btn-primary">Book Appointment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hospital Details Modal -->
+    <div id="hospitalModal" class="modal">
+        <div class="modal-content hospital-modal">
+            <span class="close" onclick="closeHospitalModal()">&times;</span>
+            <div id="hospitalDetails"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-leaf"></i> AyurSutra</h3>
+                    <p>Traditional Ayurvedic healing with modern healthcare management</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="hospitals.html">Hospitals</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="login.html">Login</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> +91 9876543210</p>
+                        <p><i class="fas fa-envelope"></i> info@ayursutra.com</p>
+                        <p><i class="fas fa-clock"></i> 24/7 Helpline</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 AyurSutra. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div id="chatbot" class="chatbot">
+        <div class="chatbot-header" onclick="toggleChat()">
+            <i class="fas fa-comments"></i>
+            <span>AyurBot</span>
+            <span class="notification-badge" id="chatNotification">1</span>
+        </div>
+        <div class="chatbot-body" id="chatbotBody">
+            <div class="chat-messages" id="chatMessages">
+                <div class="bot-message">
+                    <p>Hi! I'm AyurBot. How can I help you today?</p>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Type your message...">
+                <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/hospitals.js"></script>
+    <script src="js/booking.js"></script>
+    <script src="js/chatbot.js"></script>
+</body>
+</html>

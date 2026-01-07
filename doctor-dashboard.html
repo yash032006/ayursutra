@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Dashboard - AyurSutra</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="dashboard-page">
+    <!-- Navigation Bar -->
+    <nav class="navbar dashboard-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><i class="fas fa-leaf"></i> AyurSutra</h2>
+            </div>
+            <div class="nav-menu">
+                <span class="welcome-text">Welcome, <span id="doctorName">Loading...</span></span>
+                <div class="notification-icon" onclick="toggleNotifications()">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge" id="notificationCount">2</span>
+                </div>
+                <a href="#" onclick="logout()" class="nav-link logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active">
+                        <a href="#overview" onclick="showSection('overview')">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Overview</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#today-schedule" onclick="showSection('today-schedule')">
+                            <i class="fas fa-calendar-day"></i>
+                            <span>Today's Schedule</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#patients" onclick="showSection('patients')">
+                            <i class="fas fa-users"></i>
+                            <span>My Patients</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#treatments" onclick="showSection('treatments')">
+                            <i class="fas fa-prescription"></i>
+                            <span>Treatment Plans</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#feedback" onclick="showSection('feedback')">
+                            <i class="fas fa-star"></i>
+                            <span>Patient Feedback</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#notifications" onclick="showSection('notifications')">
+                            <i class="fas fa-bell"></i>
+                            <span>Notifications</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Overview Section -->
+            <section id="overview" class="content-section active">
+                <div class="section-header">
+                    <h2><i class="fas fa-tachometer-alt"></i> Dashboard Overview</h2>
+                    <div class="header-actions">
+                        <button onclick="refreshDashboard()" class="btn-secondary">
+                            <i class="fas fa-refresh"></i> Refresh
+                        </button>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-day"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="todayAppointments">8</h3>
+                            <p>Today's Sessions</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalPatients">45</h3>
+                            <p>Total Patients</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-user-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="activePatients">12</h3>
+                            <p>Active Treatments</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="averageRating">4.9</h3>
+                            <p>Average Rating</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="overview-grid">
+                    <div class="overview-card">
+                        <h3>Today's Upcoming Sessions</h3>
+                        <div id="upcomingSessions" class="sessions-preview">
+                            <!-- Sessions will be loaded here -->
+                        </div>
+                        <a href="#today-schedule" onclick="showSection('today-schedule')" class="view-all-link">View Full Schedule</a>
+                    </div>
+
+                    <div class="overview-card">
+                        <h3>Recent Patient Feedback</h3>
+                        <div id="recentFeedback" class="feedback-preview">
+                            <!-- Feedback will be loaded here -->
+                        </div>
+                        <a href="#feedback" onclick="showSection('feedback')" class="view-all-link">View All Feedback</a>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <div class="action-buttons">
+                        <button onclick="addNewPatient()" class="btn-primary">
+                            <i class="fas fa-user-plus"></i> Add New Patient
+                        </button>
+                        <button onclick="scheduleAppointment()" class="btn-primary">
+                            <i class="fas fa-calendar-plus"></i> Schedule Session
+                        </button>
+                        <button onclick="viewTreatmentPlans()" class="btn-secondary">
+                            <i class="fas fa-clipboard-list"></i> Treatment Plans
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Today's Schedule Section -->
+            <section id="today-schedule" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-calendar-day"></i> Today's Schedule</h2>
+                    <div class="header-actions">
+                        <input type="date" id="scheduleDate" class="date-input" onchange="loadScheduleForDate()">
+                        <button onclick="rescheduleSession()" class="btn-secondary">
+                            <i class="fas fa-edit"></i> Reschedule
+                        </button>
+                    </div>
+                </div>
+
+                <div class="schedule-container">
+                    <div class="schedule-timeline">
+                        <div id="scheduleList" class="schedule-list">
+                            <!-- Schedule items will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Patients Section -->
+            <section id="patients" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-users"></i> My Patients</h2>
+                    <div class="header-actions">
+                        <input type="text" id="patientSearch" placeholder="Search patients..." class="search-input">
+                        <select id="patientFilter" class="filter-select">
+                            <option value="">All Patients</option>
+                            <option value="active">Active Treatment</option>
+                            <option value="completed">Completed</option>
+                            <option value="pending">Pending</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="patients-grid">
+                    <div id="patientsList" class="patients-container">
+                        <!-- Patient cards will be loaded here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Treatment Plans Section -->
+            <section id="treatments" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-prescription"></i> Treatment Plans</h2>
+                    <button onclick="createTreatmentPlan()" class="btn-primary">
+                        <i class="fas fa-plus"></i> Create New Plan
+                    </button>
+                </div>
+
+                <div class="treatments-container">
+                    <div id="treatmentPlansList" class="treatment-plans-list">
+                        <!-- Treatment plans will be loaded here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Patient Feedback Section -->
+            <section id="feedback" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-star"></i> Patient Feedback</h2>
+                    <div class="feedback-stats">
+                        <span class="stat-item">Average: <strong id="avgRating">4.9</strong></span>
+                        <span class="stat-item">Total: <strong id="totalFeedback">156</strong></span>
+                    </div>
+                </div>
+
+                <div class="feedback-container">
+                    <div class="feedback-filters">
+                        <select id="feedbackRatingFilter" onchange="filterFeedback()">
+                            <option value="">All Ratings</option>
+                            <option value="5">5 Stars</option>
+                            <option value="4">4 Stars</option>
+                            <option value="3">3 Stars</option>
+                            <option value="2">2 Stars</option>
+                            <option value="1">1 Star</option>
+                        </select>
+                        <select id="feedbackCategoryFilter" onchange="filterFeedback()">
+                            <option value="">All Categories</option>
+                            <option value="treatment">Treatment Quality</option>
+                            <option value="service">Service Quality</option>
+                            <option value="facility">Facility</option>
+                            <option value="staff">Staff Behavior</option>
+                        </select>
+                    </div>
+
+                    <div id="feedbackList" class="feedback-list">
+                        <!-- Feedback items will be loaded here -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Notifications Section -->
+            <section id="notifications" class="content-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-bell"></i> Notifications</h2>
+                    <button onclick="markAllNotificationsRead()" class="btn-secondary">Mark All as Read</button>
+                </div>
+
+                <div class="notifications-container">
+                    <div id="notificationsList" class="notifications-list">
+                        <!-- Notifications will be loaded here -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Notification Dropdown -->
+    <div id="notificationDropdown" class="notification-dropdown">
+        <div class="notification-header">
+            <h4>Recent Notifications</h4>
+            <button onclick="toggleNotifications()" class="close-notifications">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="quickNotifications" class="quick-notifications">
+            <!-- Quick notifications will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Patient Details Modal -->
+    <div id="patientModal" class="modal">
+        <div class="modal-content patient-modal">
+            <span class="close" onclick="closePatientModal()">&times;</span>
+            <div id="patientDetails">
+                <!-- Patient details will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Patient Modal -->
+    <div id="addPatientModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddPatientModal()">&times;</span>
+            <h2>Add New Patient</h2>
+            <form id="addPatientForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="newPatientName">Patient Name *</label>
+                        <input type="text" id="newPatientName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPatientPhone">Phone Number *</label>
+                        <input type="tel" id="newPatientPhone" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="newPatientAge">Age</label>
+                        <input type="number" id="newPatientAge" min="1" max="120">
+                    </div>
+                    <div class="form-group">
+                        <label for="newPatientGender">Gender</label>
+                        <select id="newPatientGender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="newPatientCondition">Health Condition *</label>
+                    <textarea id="newPatientCondition" rows="3" required placeholder="Describe the patient's condition..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="newPatientTreatment">Treatment Type</label>
+                    <select id="newPatientTreatment">
+                        <option value="vaman">Vaman Therapy</option>
+                        <option value="virechan">Virechan Therapy</option>
+                        <option value="basti">Basti Therapy</option>
+                        <option value="nasya">Nasya Therapy</option>
+                        <option value="raktamokshana">Raktamokshana</option>
+                        <option value="consultation">Consultation Only</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" onclick="closeAddPatientModal()" class="btn-secondary">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Patient</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Reschedule Modal -->
+    <div id="rescheduleModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeRescheduleModal()">&times;</span>
+            <h2>Reschedule Session</h2>
+            <form id="rescheduleForm">
+                <div class="form-group">
+                    <label for="reschedulePatient">Patient</label>
+                    <select id="reschedulePatient" required>
+                        <option value="">Select Patient</option>
+                        <!-- Options will be populated dynamically -->
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="rescheduleDate">New Date *</label>
+                        <input type="date" id="rescheduleDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rescheduleTime">New Time *</label>
+                        <select id="rescheduleTime" required>
+                            <option value="09:00">9:00 AM</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="14:00">2:00 PM</option>
+                            <option value="15:00">3:00 PM</option>
+                            <option value="16:00">4:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="rescheduleReason">Reason for Rescheduling</label>
+                    <textarea id="rescheduleReason" rows="3" placeholder="Optional: Explain reason for rescheduling"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" onclick="closeRescheduleModal()" class="btn-secondary">Cancel</button>
+                    <button type="submit" class="btn-primary">Reschedule</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/doctor-dashboard.js"></script>
+</body>
+</html>

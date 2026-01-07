@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - AyurSutra</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2><i class="fas fa-leaf"></i> AyurSutra</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="hospitals.html" class="nav-link">Hospitals</a>
+                <a href="faq.html" class="nav-link active">FAQ</a>
+                <a href="login.html" class="nav-link login-btn">
+                    <i class="fas fa-user"></i> Login
+                </a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Frequently Asked Questions</h1>
+            <p>Find answers to common questions about AyurSutra and Panchkarma treatments</p>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="faq-search">
+        <div class="container">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="faqSearch" placeholder="Search for answers...">
+                <button onclick="searchFAQ()" class="search-btn">Search</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Categories -->
+    <section class="faq-categories">
+        <div class="container">
+            <div class="category-filters">
+                <button class="category-btn active" onclick="filterCategory('all')">All</button>
+                <button class="category-btn" onclick="filterCategory('booking')">Booking</button>
+                <button class="category-btn" onclick="filterCategory('treatment')">Treatment</button>
+                <button class="category-btn" onclick="filterCategory('account')">Account</button>
+                <button class="category-btn" onclick="filterCategory('general')">General</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Content -->
+    <section class="faq-content">
+        <div class="container">
+            <div class="faq-accordion">
+                
+                <!-- Booking Related FAQs -->
+                <div class="faq-item" data-category="booking">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>How do I book an appointment?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Booking an appointment is easy! Follow these steps:</p>
+                        <ol>
+                            <li>Visit our <strong>Hospitals</strong> page</li>
+                            <li>Search for hospitals in your preferred location</li>
+                            <li>Select a hospital and view available doctors</li>
+                            <li>Click the <strong>"Book Appointment"</strong> button</li>
+                            <li>Fill in your details including name and phone number</li>
+                            <li>Verify your phone number with OTP</li>
+                            <li>Select your preferred date and time slot</li>
+                            <li>Optionally describe your health concerns</li>
+                            <li>Submit your appointment request</li>
+                        </ol>
+                        <p>The hospital admin will review your request and assign you to an appropriate doctor. You'll receive login credentials once your appointment is confirmed.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="booking">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Can I choose my doctor?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>While you can view doctor profiles and their specializations, the final doctor assignment is made by the hospital administration based on:</p>
+                        <ul>
+                            <li>Your specific health condition</li>
+                            <li>Doctor's availability and expertise</li>
+                            <li>Treatment requirements</li>
+                            <li>Doctor's current patient load</li>
+                        </ul>
+                        <p>However, you can express a preference in the appointment booking form or contact the hospital directly to discuss doctor selection.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="booking">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>How is my feedback used?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Your feedback is valuable and is used to:</p>
+                        <ul>
+                            <li><strong>Improve Treatment Quality:</strong> Help doctors understand what works best for patients</li>
+                            <li><strong>Enhance Service:</strong> Improve hospital facilities and staff training</li>
+                            <li><strong>Doctor Ratings:</strong> Contribute to doctor ratings displayed on hospital profiles</li>
+                            <li><strong>System Improvements:</strong> Enhance our platform based on user experiences</li>
+                            <li><strong>Quality Assurance:</strong> Maintain high standards across partner hospitals</li>
+                        </ul>
+                        <p>All feedback is kept confidential and used only for improvement purposes. You can provide feedback through your patient dashboard after each session.</p>
+                    </div>
+                </div>
+
+                <!-- Treatment Related FAQs -->
+                <div class="faq-item" data-category="treatment">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>How does Panchkarma treatment work?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Panchkarma is a comprehensive detoxification and rejuvenation program consisting of five main therapies:</p>
+                        <div class="treatment-details">
+                            <div class="treatment-detail">
+                                <h4><i class="fas fa-wind"></i> Vaman (Therapeutic Vomiting)</h4>
+                                <p>Eliminates excess kapha dosha from the respiratory and digestive systems</p>
+                            </div>
+                            <div class="treatment-detail">
+                                <h4><i class="fas fa-seedling"></i> Virechan (Purgation)</h4>
+                                <p>Removes excess pitta dosha from the liver and digestive system</p>
+                            </div>
+                            <div class="treatment-detail">
+                                <h4><i class="fas fa-tint"></i> Basti (Medicated Enema)</h4>
+                                <p>Balances vata dosha and cleanses the colon</p>
+                            </div>
+                            <div class="treatment-detail">
+                                <h4><i class="fas fa-lungs"></i> Nasya (Nasal Administration)</h4>
+                                <p>Clears sinuses and treats head-related disorders</p>
+                            </div>
+                            <div class="treatment-detail">
+                                <h4><i class="fas fa-heart"></i> Raktamokshana (Bloodletting)</h4>
+                                <p>Purifies blood and treats blood-related disorders</p>
+                            </div>
+                        </div>
+                        <p>The treatment is personalized based on your constitution, health condition, and specific needs. The entire process typically takes 7-21 days depending on your condition.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="treatment">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>What if I miss a session?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>If you miss a scheduled treatment session:</p>
+                        <ol>
+                            <li><strong>Contact Immediately:</strong> Inform your doctor or hospital as soon as possible</li>
+                            <li><strong>Reschedule:</strong> Work with your doctor to reschedule the missed session</li>
+                            <li><strong>Treatment Continuity:</strong> Your doctor may adjust the treatment plan to maintain effectiveness</li>
+                            <li><strong>No Penalty:</strong> There are no penalties for genuine emergencies</li>
+                        </ol>
+                        <p><strong>Important:</strong> Panchkarma treatments follow a specific sequence and timing. Missing sessions can affect treatment outcomes, so it's crucial to maintain regular attendance. If you anticipate scheduling conflicts, discuss alternatives with your doctor in advance.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="treatment">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>How do I reschedule my treatment?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can reschedule your treatment sessions in several ways:</p>
+                        
+                        <h4>Through Patient Dashboard:</h4>
+                        <ol>
+                            <li>Login to your patient dashboard</li>
+                            <li>Go to the "Treatment Progress" section</li>
+                            <li>Click "Request Schedule Change"</li>
+                            <li>Select reason and provide details</li>
+                            <li>Submit your request</li>
+                        </ol>
+
+                        <h4>Direct Contact:</h4>
+                        <ul>
+                            <li>Call the hospital directly</li>
+                            <li>Speak with your assigned doctor</li>
+                            <li>Contact through AyurBot chat</li>
+                        </ul>
+
+                        <h4>Notice Period:</h4>
+                        <ul>
+                            <li><strong>24 hours advance notice</strong> is preferred</li>
+                            <li>Emergency rescheduling is always accommodated</li>
+                            <li>Multiple rescheduling requests should be discussed with your doctor</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Account Related FAQs -->
+                <div class="faq-item" data-category="account">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Who gives me my login credentials?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Login credentials are provided by different authorities based on your role:</p>
+                        
+                        <div class="credential-info">
+                            <h4><i class="fas fa-user-injured"></i> For Patients:</h4>
+                            <ul>
+                                <li>Hospital admin creates your account after appointment approval</li>
+                                <li>Your assigned doctor provides the login credentials</li>
+                                <li>Credentials are shared via phone or email</li>
+                                <li>You receive a unique Patient ID and temporary password</li>
+                            </ul>
+
+                            <h4><i class="fas fa-user-md"></i> For Doctors:</h4>
+                            <ul>
+                                <li>Hospital administration creates doctor accounts</li>
+                                <li>Admin provides Doctor ID and password</li>
+                                <li>Credentials are given during onboarding</li>
+                            </ul>
+
+                            <h4><i class="fas fa-user-shield"></i> For Admins:</h4>
+                            <ul>
+                                <li>System administrator creates admin accounts</li>
+                                <li>Provided during hospital partnership setup</li>
+                                <li>Includes full system access privileges</li>
+                            </ul>
+                        </div>
+
+                        <p><strong>Security Note:</strong> Change your password after first login for security. Never share your credentials with others.</p>
+                    </div>
+                </div>
+
+                <!-- General FAQs -->
+                <div class="faq-item" data-category="general">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>What are the operating hours for appointments?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Operating hours vary by hospital, but generally:</p>
+                        <ul>
+                            <li><strong>Morning:</strong> 9:00 AM - 12:00 PM</li>
+                            <li><strong>Afternoon:</strong> 2:00 PM - 5:00 PM</li>
+                            <li><strong>Evening:</strong> 5:00 PM - 8:00 PM</li>
+                            <li><strong>Closed:</strong> Sundays and public holidays</li>
+                        </ul>
+                        <p>Some hospitals may have different timings. Check the specific hospital's profile for exact operating hours and availability.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="general">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>Is there a mobile app available?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Currently, AyurSutra is available as a responsive web application that works seamlessly on:</p>
+                        <ul>
+                            <li>Desktop computers</li>
+                            <li>Tablets</li>
+                            <li>Mobile phones</li>
+                        </ul>
+                        <p>The web app provides all the functionality you need and works across all devices. A dedicated mobile app is in development and will be available soon.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item" data-category="general">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h3>How do I contact support?</h3>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can reach our support team through multiple channels:</p>
+                        
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <h4><i class="fas fa-comments"></i> AyurBot Chat</h4>
+                                <p>Use our chatbot available on every page for instant answers</p>
+                            </div>
+
+                            <div class="contact-method">
+                                <h4><i class="fas fa-phone"></i> Phone Support</h4>
+                                <p>Call our 24/7 helpline: <strong>+91 9876543210</strong></p>
+                            </div>
+
+                            <div class="contact-method">
+                                <h4><i class="fas fa-envelope"></i> Email Support</h4>
+                                <p>Send your queries to: <strong>info@ayursutra.com</strong></p>
+                            </div>
+
+                            <div class="contact-method">
+                                <h4><i class="fas fa-hospital"></i> Hospital Direct</h4>
+                                <p>Contact your assigned hospital directly for treatment-related queries</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Still Have Questions Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-card">
+                <h2>Still Have Questions?</h2>
+                <p>Can't find what you're looking for? Our support team is here to help!</p>
+                <div class="contact-actions">
+                    <button onclick="toggleChat()" class="btn-primary">
+                        <i class="fas fa-comments"></i> Chat with AyurBot
+                    </button>
+                    <a href="tel:+919876543210" class="btn-secondary">
+                        <i class="fas fa-phone"></i> Call Support
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-leaf"></i> AyurSutra</h3>
+                    <p>Traditional Ayurvedic healing with modern healthcare management</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="hospitals.html">Hospitals</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="login.html">Login</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <div class="contact-info">
+                        <p><i class="fas fa-phone"></i> +91 9876543210</p>
+                        <p><i class="fas fa-envelope"></i> info@ayursutra.com</p>
+                        <p><i class="fas fa-clock"></i> 24/7 Helpline</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 AyurSutra. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div id="chatbot" class="chatbot">
+        <div class="chatbot-header" onclick="toggleChat()">
+            <i class="fas fa-comments"></i>
+            <span>AyurBot</span>
+            <span class="notification-badge" id="chatNotification">1</span>
+        </div>
+        <div class="chatbot-body" id="chatbotBody">
+            <div class="chat-messages" id="chatMessages">
+                <div class="bot-message">
+                    <p>Hi! I'm AyurBot. I can help you find answers to your questions!</p>
+                </div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Type your message...">
+                <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+    <script src="js/faq.js"></script>
+    <script src="js/chatbot.js"></script>
+</body>
+</html>
